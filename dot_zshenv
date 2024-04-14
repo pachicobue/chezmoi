@@ -1,0 +1,52 @@
+path+=('$HOME/.local/bin')
+path+=('$HOME/.cargo/bin')
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+export LANG=ja_JP.UTF-8
+
+bindkey -e
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# fcitx
+export XMODIFIERS=@im=fcitx
+
+# firefox
+export MOZ_ENABLE_WAYLAND=1
+
+# Zsh config place
+export ZDOTDIR=$HOME/.config/zsh 
+export STARSHIP_CONFIG=~/.config/starship/config.toml
+
+# Online Judge
+export ALGOLIB_PATH=${HOME}/programming/oj-environment/algolib
+export ACL_PATH=${HOME}/programming/oj-environment/ac-library
+export CXX_COMPILER=clang++
+cxx_common_options=(-std=gnu++20 -Wall -Wextra -I${ALGOLIB_PATH}/src -I${ACL_PATH})
+cxx_debug_options=(-O0 -g3 -fsanitize=undefined,address -DHOGAPACHI)
+cxx_release_options=(-O2 -DHOGEPACHI)
+export CXX_COMMON_OPTIONS="${cxx_common_options}"
+export CXX_DEBUG_OPTIONS="${cxx_debug_options}"
+export CXX_RELEASE_OPTIONS="${cxx_release_options}"
+function dg++() {
+    source_name=${1}
+    binary_name=${1%.cpp}.exe
+    ${CXX_COMPILER} ${cxx_common_options} ${cxx_debug_options} ${source_name} -o ${binary_name}
+}
+function fg++() {
+    source_name=${1}
+    binary_name=${1%.cpp}.exe
+    ${CXX_COMPILER} ${cxx_common_options} ${cxx_release_options} ${source_name} -o ${binary_name}
+}
+function dgch() {
+    source_name=${1}
+    binary_name=${1}.dg++.gch
+    ${CXX_COMPILER} ${cxx_common_options} ${cxx_debug_options} ${source_name} -o ${binary_name}
+}
+function fgch() {
+    source_name=${1}
+    binary_name=${1}.fg++.gch
+    ${CXX_COMPILER} ${cxx_common_options} ${cxx_release_options} ${source_name} -o ${binary_name}
+}
