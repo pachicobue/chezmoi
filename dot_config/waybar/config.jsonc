@@ -8,29 +8,24 @@
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
-        "cpu",
-        "memory",
-        "temperature"
     ],
     "modules-center": [
-	"hyprland/window"
+        "clock"
     ],
     "modules-right": [
+        "cpu",
+        "memory",
+        "temperature",
         "pulseaudio",
         "tray",
-        "clock",
-	"custom/power"
+        "custom/power"
     ],
-    "hyprland/window": {
-        "format": "  {}",
-        "separate-outputs": true
-    },
     "tray": {
         "spacing": 10
     },
     "clock": {
-	"format": "󰥔 {:%H:%M:%S}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "󰥔 {:%H:%M}",
+        "tooltip-format": "<big>{:%Y/%m/%d}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
         "format": "󰍛 {usage}%"
@@ -58,7 +53,7 @@
         "on-click": "pavucontrol"
     },
     "custom/power": {
-	"format": "󰐥",
-	"on-click": "wlogout"
+        "format": "󰐥",
+        "on-click": "wlogout"
     }
 }
