@@ -3,8 +3,8 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-	{
-		"github/copilot.vim",
-		lazy = false,
-	},
+    {
+        "github/copilot.vim",
+        lazy = false,
+    },
 }
