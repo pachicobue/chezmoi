@@ -6,6 +6,7 @@ return {
         local Terminal = require("toggleterm.terminal").Terminal
         local common = Terminal:new({
             direction = "horizontal",
+            hide_numbers = true,
             hidden = true,
         })
         local lazygit = Terminal:new({

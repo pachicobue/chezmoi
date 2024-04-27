@@ -11,7 +11,7 @@ return {
                 local cd = vim.fn.expand("%:p:h")
                 require("oil").open_float(cd)
             end,
-            "Toggle [E]xplorer",
+            desc = "Toggle [E]xplorer",
         },
     },
     opts = {
