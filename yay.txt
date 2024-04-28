@@ -1,0 +1,7 @@
+brother-dcpj582n 1.0.5-0
+hyprshot 1.2.3-1
+neovim-remote 2.5.1-1
+nkf-debug 2.1.5-2
+nvm 0.39.7-1
+wlogout 1.2.2-0
+yay 12.3.5-1

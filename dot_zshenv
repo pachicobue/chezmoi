@@ -1,3 +1,5 @@
+echo "Loading .zshenv"
+
 path+=('$HOME/.local/bin')
 path+=('$HOME/.cargo/bin')
 
@@ -8,7 +10,6 @@ export LANG=ja_JP.UTF-8
 bindkey -e
 
 # ssh-agent
-
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # fcitx

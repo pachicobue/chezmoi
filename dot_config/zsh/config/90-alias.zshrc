@@ -14,4 +14,5 @@ alias reload='exec -l ${SHELL}'
 
 # Editor
 alias e='emacsclient'
+alias nvim-client='nvr'
 alias code='code-insiders'

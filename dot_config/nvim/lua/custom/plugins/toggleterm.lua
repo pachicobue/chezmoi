@@ -5,12 +5,12 @@ return {
         require("toggleterm").setup()
         local Terminal = require("toggleterm.terminal").Terminal
         local common = Terminal:new({
-            direction = "horizontal",
-            hide_numbers = true,
+            direction = "vertical",
             hidden = true,
+            size = vim.o.columns * 0.5,
         })
-        local lazygit = Terminal:new({
-            cmd = "lazygit",
+        local tig = Terminal:new({
+            cmd = "tig status",
             dir = "git_dir",
             direction = "float",
             hidden = true,
@@ -23,11 +23,11 @@ return {
             common:toggle()
         end
 
-        function ToggleLazygitTerm()
-            lazygit:toggle()
+        function ToggleTigTerm()
+            tig:toggle()
         end
 
         vim.keymap.set("n", "<leader>tt", "<Cmd>lua ToggleCommonTerm()<CR>", { desc = "Toggle [T]erminal" })
-        vim.keymap.set("n", "<leader>tg", "<Cmd>lua ToggleLazygitTerm()<CR>", { desc = "Toggle [G]it" })
+        vim.keymap.set("n", "<leader>tg", "<Cmd>lua ToggleTigTerm()<CR>", { desc = "Toggle [G]it" })
     end,
 }

@@ -6,8 +6,8 @@ return {
         require("bufferline").setup({
             vim.keymap.set("n", "gt", "<Cmd>BufferLineCycleNext<CR>", { noremap = true, silent = true }),
             vim.keymap.set("n", "gT", "<Cmd>BufferLineCyclePrev<CR>", { noremap = true, silent = true }),
-            vim.keymap.set("n", "<C-Tab>", "<Cmd>BufferLineCycleNext<CR>", { noremap = true, silent = true }),
-            vim.keymap.set("n", "<C-S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { noremap = true, silent = true }),
+            vim.keymap.set("", "<C-Tab>", "<Cmd>BufferLineCycleNext<CR>", { noremap = true, silent = true }),
+            vim.keymap.set("", "<C-S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { noremap = true, silent = true }),
         })
     end,
 }
