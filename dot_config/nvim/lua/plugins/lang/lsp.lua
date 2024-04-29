@@ -6,11 +6,16 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        "kkharji/lspsaga.nvim",
-
-        -- Useful status updates for LSP.
-        { "j-hui/fidget.nvim", opts = {} },
-
+        {
+            "kkharji/lspsaga.nvim",
+            config = function()
+                require("lspsaga").setup({})
+            end,
+            dependencies = {
+                "nvim-treesitter/nvim-treesitter",
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
         -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
         -- used for completion, annotations and signatures of Neovim apis
         { "folke/neodev.nvim", opts = {} },

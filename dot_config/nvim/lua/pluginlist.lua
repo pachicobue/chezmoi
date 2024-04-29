@@ -13,7 +13,9 @@ require("lazy").setup({
         { "folke/lazy.nvim" },
 
         -- Subfolder
+        { import = "plugins.keymap" },
         { import = "plugins.ui" },
+        { import = "plugins.search" },
         { import = "plugins.editing" },
         { import = "plugins.explorer" },
         { import = "plugins.lang" },

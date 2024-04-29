@@ -5,12 +5,11 @@ return {
         require("toggleterm").setup()
         local Terminal = require("toggleterm.terminal").Terminal
         local common = Terminal:new({
-            direction = "vertical",
+            direction = "float",
             hidden = true,
-            size = vim.o.columns * 0.5,
         })
         local tig = Terminal:new({
-            cmd = "tig status",
+            cmd = "lazygit",
             dir = "git_dir",
             direction = "float",
             hidden = true,

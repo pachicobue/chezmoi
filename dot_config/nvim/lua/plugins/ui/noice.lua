@@ -1,9 +1,19 @@
 return {
-    -- Popup cmdline,messages,...
     "folke/noice.nvim",
+    event = "VeryLazy",
     dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        {
+            "rcarriga/nvim-notify",
+            config = function()
+                require("notify").setup({
+                    timeout = 100,
+                    level = 3,
+                })
+            end,
+        },
     },
-    config = true,
+    config = function()
+        require("noice").setup({})
+    end,
 }
