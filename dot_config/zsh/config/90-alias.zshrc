@@ -13,6 +13,6 @@ alias resource="source ${ZDOTDIR}/.zshrc"
 alias reload='exec -l ${SHELL}'
 
 # Editor
-alias e='emacsclient'
-alias nvim-client='nvr'
+alias nvim='nvim --listen /tmp/nvimsocket'
+alias e='nvr --remote-silent'
 alias code='code-insiders'

@@ -3,8 +3,8 @@ echo "Loading .zshenv"
 path+=('$HOME/.local/bin')
 path+=('$HOME/.cargo/bin')
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='nvr --remote-tab-wait-silent'
+export VISUAL='nvr --remote-tab-wait-silent'
 export LANG=ja_JP.UTF-8
 
 bindkey -e

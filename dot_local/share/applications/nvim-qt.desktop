@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Neovim-Qt(Server)
-Comment=Neovim-Qt (Server /tmp/nvimsocket)
-Exec=nvim-qt -- --listen /tmp/nvimsocket
-Icon=nvim
-Terminal=false
-Type=Application
-Categories=TextEditor;Development;Utility;GTK;

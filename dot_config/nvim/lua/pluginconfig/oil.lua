@@ -2,7 +2,7 @@ return {
     "stevearc/oil.nvim",
     lazy = true,
     dependencies = {
-        "nvim-lua/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
     },
     keys = {
         {
