@@ -1,5 +1,4 @@
 return {
-    -- Fuzzy Finder (files, lsp, etc)
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
     branch = "0.1.x",
@@ -14,15 +13,23 @@ return {
             end,
         },
         { "nvim-telescope/telescope-ui-select.nvim" },
-        { "debugloop/telescope-undo.nvim" },
-        { "nvim-telescope/telescope-file-browser.nvim" },
         {
             "danielfalk/smart-open.nvim",
             branch = "0.2.x",
             dependencies = { "kkharji/sqlite.lua" },
         },
-        { "nvim-telescope/telescope-project.nvim" },
         { "jvgrootveld/telescope-zoxide" },
+        {
+            "ahmedkhalf/project.nvim",
+            config = function()
+                require("project_nvim").setup({
+                    detection_methods = { "pattern", "lsp" },
+                    patterns = { ".git", ".project", ".project.nvim" },
+                    silent_chdir = true,
+                    show_hidden = true,
+                })
+            end,
+        },
         { "nvim-tree/nvim-web-devicons" },
     },
     config = function()
@@ -31,61 +38,28 @@ return {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
                 },
-                file_browser = {
-                    hijack_netrw = true,
-                    hidden = { file_browser = true, folder_browser = true },
-                    mappings = {
-                        ["i"] = {},
-                        ["n"] = {},
-                    },
-                },
-                zoxide = {
-                    prompt_title = "[ Walking on the shoulders of TJ ]",
-                    mappings = {
-                        default = {
-                            after_action = function(selection)
-                                print("Update to (" .. selection.z_score .. ") " .. selection.path)
-                            end,
-                        },
-                        ["<C-s>"] = {
-                            before_action = function(selection)
-                                print("before C-s")
-                            end,
-                            action = function(selection)
-                                vim.cmd.edit(selection.path)
-                            end,
-                        },
-                        -- Opens the selected entry in a new split
-                        ["<C-q>"] = {
-                            action = require("telescope._extensions.zoxide.utils").create_basic_command("split"),
-                        },
-                    },
-                },
             },
         })
         pcall(require("telescope").load_extension, "fzf")
         pcall(require("telescope").load_extension, "ui-select")
-        pcall(require("telescope").load_extension, "undo")
         pcall(require("telescope").load_extension, "notify")
-        pcall(require("telescope").load_extension, "file_browser")
-        pcall(require("telescope").load_extension, "project")
-        pcall(require("telescope").load_extension, "zoxide")
+        pcall(require("telescope").load_extension, "projects")
         pcall(require("telescope").load_extension, "smart_open")
+        pcall(require("telescope").load_extension, "zoxide")
 
-        vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope notify<CR>", { desc = "File [N]otify" })
-        vim.keymap.set("n", "<leader>fu", "<Cmd>Telescope undo<CR>", { desc = "File [U]ndo" })
+        local builtin = require("telescope.builtin")
+        vim.keymap.set("n", "<leader>fg", function()
+            builtin.live_grep({})
+        end, { desc = "File [G]rep" })
 
-        local filebrowser = require("telescope").extensions.file_browser
-        vim.keymap.set("n", "<leader>fb", function()
-            filebrowser.file_browser()
-        end, { desc = "File [B]rowser" })
+        local notify = require("telescope").extensions.notify
+        vim.keymap.set("n", "<leader>fn", function()
+            notify.notify({})
+        end, { desc = "File [N]otify" })
 
-        local zoxide = require("telescope").extensions.zoxide
-        vim.keymap.set("n", "<leader>fz", zoxide.list, { desc = "File [Z]oxide" })
-
-        local project = require("telescope").extensions.project
+        local projects = require("telescope").extensions.projects
         vim.keymap.set("n", "<leader>fp", function()
-            project.project({})
+            projects.projects({})
         end, { desc = "File [P]roject" })
 
         local smartopen = require("telescope").extensions.smart_open
@@ -95,5 +69,10 @@ return {
         vim.keymap.set("n", "<leader>fr", function()
             smartopen.smart_open({ cwd_only = false })
         end, { desc = "File [R]ecent" })
+
+        local zoxide = require("telescope").extensions.zoxide
+        vim.keymap.set("n", "<leader>fz", function()
+            zoxide.list({})
+        end, { desc = "File [Z]oxide" })
     end,
 }

@@ -8,7 +8,7 @@ return {
             config = function()
                 require("notify").setup({
                     timeout = 300,
-                    level = 3,
+                    level = 2,
                 })
             end,
         },

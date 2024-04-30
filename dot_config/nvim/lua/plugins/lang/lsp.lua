@@ -16,7 +16,8 @@ return {
                 require("lspsaga").setup({
                     symbol_in_winbar = {
                         enable = true,
-                        hide_keyword = false,
+                        show_file = false,
+                        hide_keyword = true,
                         folder_level = 1,
                     },
                     callhierarchy = {
