@@ -13,9 +13,12 @@ return {
                 return vim.fn.executable("make") == 1
             end,
         },
-        { "nvim-telescope/telescope-frecency.nvim" },
         { "nvim-telescope/telescope-ui-select.nvim" },
         { "debugloop/telescope-undo.nvim" },
+        {
+            "nvim-telescope/telescope-file-browser.nvim",
+            dependencies = { "nvim-lua/plenary.nvim" },
+        },
         { "nvim-tree/nvim-web-devicons" },
     },
     config = function()
@@ -24,20 +27,24 @@ return {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
                 },
+                file_browser = {
+                    hijack_netrw = true,
+                    hidden = { file_browser = true, folder_browser = true },
+                    mappings = {
+                        ["i"] = {},
+                        ["n"] = {},
+                    },
+                },
             },
         })
         pcall(require("telescope").load_extension, "fzf")
         pcall(require("telescope").load_extension, "ui-select")
-        pcall(require("telescope").load_extension, "frecency")
         pcall(require("telescope").load_extension, "undo")
         pcall(require("telescope").load_extension, "notify")
+        pcall(require("telescope").load_extension, "file_browser")
 
-        local builtin = require("telescope.builtin")
-        vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "File [F]ind" })
-        vim.keymap.set("n", "<leader>fr", "<Cmd>Telescope frecency<CR>", { desc = "File [R]ecent" })
+        vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope notify<CR>", { desc = "File [N]otify" })
         vim.keymap.set("n", "<leader>fu", "<Cmd>Telescope undo<CR>", { desc = "File [U]ndo" })
-        vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "LSP [D]efinitions" })
-        vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "LSP [R]eferences" })
-        vim.keymap.set("n", "<leader>le", builtin.diagnostics, { desc = "LSP [E]rrors" })
+        vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { desc = "File [B]rowser" })
     end,
 }

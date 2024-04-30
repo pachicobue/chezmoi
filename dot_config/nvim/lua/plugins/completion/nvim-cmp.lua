@@ -19,29 +19,18 @@ return {
                         enable = false,
                     },
                     suggestion = {
-                        enabled = false,
-                    },
-                    server_opts_overrides = {
-                        trace = "verbose",
-                        settings = {
-                            advanced = {
-                                listCount = 1,
-                                inlineSuggestCount = 1,
-                            },
-                        },
+                        enabled = true,
+                        auto_trigger = true,
+                        debounce = 50,
                     },
                 })
-            end,
-        },
-        {
-            "zbirenbaum/copilot-cmp",
-            config = function()
-                require("copilot_cmp").setup()
             end,
         },
     },
     config = function()
         local cmp = require("cmp")
+        local copilot = require("copilot.suggestion")
+        local luasnip = require("luasnip")
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -50,17 +39,30 @@ return {
             },
             mapping = cmp.mapping.preset.insert({
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<Tab>"] = cmp.select_next_item(),
-                ["<S-Tab>"] = cmp.select_prev_item(),
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_jumpable() then
+                        luasnip.expand_or_jump()
+                    elseif copilot.is_visible() then
+                        copilot.accept()
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
             }),
             sources = {
-                { name = "nvim_lsp",                group_index = 2 },
-                { name = "nvim_lsp_signature_help", group_index = 2 },
-                { name = "luasnip",                 group_index = 2 },
-                { name = "copilot",                 group_index = 2 },
-            },
-            experimental = {
-                ghost_text = true,
+                { name = "nvim_lsp", group_index = 2, keyword_length = 4 },
+                { name = "luasnip",  group_index = 1, keyword_length = 4 },
             },
             formatting = {
                 expandable_indicator = true,
@@ -69,24 +71,23 @@ return {
                     mode = "symbol",
                     max_width = 50,
                     preset = "codicons",
-                    symbol_map = { Copilot = "" },
                 }),
             },
             sorting = {
                 priority_weight = 2,
                 comparators = {
-                    require("copilot_cmp.comparators").prioritize,
-                    cmp.config.compare.offset,
                     cmp.config.compare.exact,
-                    cmp.config.compare.score,
-                    cmp.config.compare.recently_used,
-                    cmp.config.compare.locality,
-                    cmp.config.compare.kind,
-                    cmp.config.compare.sort_text,
-                    cmp.config.compare.length,
-                    cmp.config.compare.order,
                 },
             },
         })
+        cmp.event:on("menu_opened", function()
+            vim.api.nvim_buf_set_var(0, "copilot_suggestion_hidden", true)
+            print(string.format("%s\n", vim.api.nvim_buf_get_var(0, "copilot_suggestion_hidden")))
+        end)
+
+        cmp.event:on("menu_closed", function()
+            vim.api.nvim_buf_set_var(0, "copilot_suggestion_hidden", false)
+            print(string.format("%s\n", vim.api.nvim_buf_get_var(0, "copilot_suggestion_hidden")))
+        end)
     end,
 }

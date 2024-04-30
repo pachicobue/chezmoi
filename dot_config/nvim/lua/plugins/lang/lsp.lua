@@ -2,99 +2,84 @@ return {
     -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
-        -- Automatically install LSPs and related tools to stdpath for Neovim
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
         {
-            "kkharji/lspsaga.nvim",
-            config = function()
-                require("lspsaga").setup({})
-            end,
+            "nvimdev/lspsaga.nvim",
             dependencies = {
                 "nvim-treesitter/nvim-treesitter",
                 "nvim-tree/nvim-web-devicons",
+                {
+                    "lewis6991/gitsigns.nvim",
+                    config = true,
+                },
             },
+            config = function()
+                require("lspsaga").setup({
+                    symbol_in_winbar = {
+                        enable = true,
+                        hide_keyword = false,
+                        folder_level = 1,
+                    },
+                    callhierarchy = {
+                        layout = "float",
+                    },
+                    code_actions = {
+                        show_server_name = true,
+                        extend_gitsigns = true,
+                    },
+                    finder = {
+                        keys = {
+                            shuttle = "<leader>w",
+                            toggle_or_open = "<CR>",
+                        },
+                    },
+                    lightbulb = {
+                        enabled = false,
+                    },
+                    rename = {
+                        keys = {
+                            quit = "<Esc>",
+                        },
+                    },
+                })
+            end,
         },
-        -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-        -- used for completion, annotations and signatures of Neovim apis
-        { "folke/neodev.nvim", opts = {} },
+        {
+            "folke/neodev.nvim",
+            config = true,
+        },
     },
     config = function()
-        --  This function gets run when an LSP attaches to a particular buffer.
-        --    That is to say, every time a new file is opened that is associated with
-        --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-        --    function will be executed to configure the current buffer
         vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+            group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
             callback = function(event)
                 local map = function(keys, func, desc)
-                    vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+                    vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
                 end
-
-                map("<leader>ln", vim.lsp.buf.rename, "LSP Re[n]ame")
-                map("<leader>la", vim.lsp.buf.code_action, "LSP [A]ction")
-                map("<leader>lh", vim.lsp.buf.hover, "LSP [H]over")
-
-                local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client.server_capabilities.documentHighlightProvider then
-                    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-                        buffer = event.buf,
-                        callback = vim.lsp.buf.document_highlight,
-                    })
-
-                    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-                        buffer = event.buf,
-                        callback = vim.lsp.buf.clear_references,
-                    })
-                end
+                map("<leader>ld", "<Cmd>Lspsaga peek_definition<CR>", "LSP [D]efinition")
+                map("<leader>la", "<Cmd>Lspsaga code_action<CR>", "LSP [A]ction")
+                map("<leader>le", "<Cmd>Lspsaga diagnostic_jump_next<CR>", "LSP [E]rror")
+                map("<leader>lf", "<Cmd>Lspsaga finder<CR>", "LSP [F]inder")
+                map("<leader>lh", "<Cmd>Lspsaga hover_doc<CR>", "LSP [H]over")
+                map("<leader>ln", "<Cmd>Lspsaga rename<CR>", "LSP Re[N]ame")
             end,
         })
 
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-        -- Enable the following language servers
-        --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-        local servers = {
-            clangd = {
-                cmd = {
-                    "clangd",
-                    "--offset-encoding=utf-16",
-                },
+        local lspconfig = require("lspconfig")
+        lspconfig.clangd.setup({
+            cmd = {
+                "clangd",
+                "--offset-encoding=utf-16",
             },
-            pyright = {},
-            rust_analyzer = {},
-            lua_ls = {
-                settings = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace",
-                        },
+        })
+        lspconfig.pyright.setup({})
+        lspconfig.rust_analyzer.setup({})
+        lspconfig.lua_ls.setup({
+            settings = {
+                Lua = {
+                    completion = {
+                        callSnippet = "Replace",
                     },
                 },
-            },
-        }
-
-        -- Ensure the servers and tools above are installed
-        require("mason").setup()
-
-        local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            "stylua", -- Used to format Lua code
-        })
-        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-        require("mason-lspconfig").setup({
-            handlers = {
-                function(server_name)
-                    local server = servers[server_name] or {}
-                    -- This handles overriding only values explicitly passed
-                    -- by the server configuration above. Useful when disabling
-                    -- certain features of an LSP (for example, turning off formatting for tsserver)
-                    server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                    require("lspconfig")[server_name].setup(server)
-                end,
             },
         })
     end,
