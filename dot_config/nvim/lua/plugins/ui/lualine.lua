@@ -3,6 +3,10 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+        local cwd = function()
+            local path = vim.loop.cwd()
+            return vim.fn.fnamemodify(path, ":~")
+        end
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -25,7 +29,7 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { { "filename", filepath = true, path = 3 } },
+                lualine_c = { cwd, { "filename", path = 1 } },
                 lualine_x = { "filetype" },
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
