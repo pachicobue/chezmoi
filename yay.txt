@@ -1,5 +1,7 @@
 brother-dcpj582n 1.0.5-0
+ghq 1.6.1-2
 hyprshot 1.2.3-1
+mise 2024.5.2-1
 neovim-remote 2.5.1-1
 nkf-debug 2.1.5-2
 nvm 0.39.7-1

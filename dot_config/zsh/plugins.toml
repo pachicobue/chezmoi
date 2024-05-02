@@ -7,7 +7,7 @@ shell = "zsh"
 inline = 'autoload -Uz compinit && compinit'
 
 [plugins.colors]
-inline = 'autoload -Uz colors'
+inline = 'autoload -Uz colors && colors'
 
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
@@ -17,6 +17,9 @@ inline = 'eval "$(zoxide init zsh)"'
 
 [plugins.mise]
 inline = 'eval "$(mise activate zsh)"'
+
+[plugins.mcfly]
+inline = 'eval "$(mcfly init zsh)"'
 
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
