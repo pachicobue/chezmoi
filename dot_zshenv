@@ -8,8 +8,6 @@ export EDITOR='nvr --remote-tab-wait-silent'
 export VISUAL='nvr --remote-tab-wait-silent'
 export LANG=ja_JP.UTF-8
 
-bindkey -e
-
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
@@ -17,8 +15,9 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export XMODIFIERS=@im=fcitx
 
 # Zsh config place
-export ZDOTDIR=$HOME/.config/zsh 
+export ZDOTDIR=$HOME/.config/zsh
 export STARSHIP_CONFIG=~/.config/starship/config.toml
+export SHELDON_CONFIG_DIR=$ZDOTDIR
 
 # Online Judge
 export ALGOLIB_PATH=${HOME}/programming/oj-environment/algolib

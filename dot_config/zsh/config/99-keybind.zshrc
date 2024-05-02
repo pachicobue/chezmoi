@@ -1,0 +1,2 @@
+bindkey -d
+bindkey -e

@@ -1,5 +1,6 @@
-# Load config
 echo "Loading .zshrc ..."
+eval "$(sheldon source)"
+
 for ZSH_RC in $ZDOTDIR/config/[0-9][0-9]-*.zshrc; do
     echo "[.zshrc] Source ${ZSH_RC}"
     source ${ZSH_RC}

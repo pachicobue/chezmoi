@@ -3,10 +3,11 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
 alias mkdir='mkdir -p'
-alias ls='ls --group-directories-first --color=auto -F'
-alias ll='ls -alF --color=auto'
-alias la='ls -A --color=auto'
-alias l='ls -CF --color=auto'
+alias ls='lsd'
+alias ll='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias lt='lsd --tree'
 
 # Restart
 alias resource="source ${ZDOTDIR}/.zshrc"
