@@ -24,7 +24,8 @@ return {
         local buttons = {
             type = "group",
             val = {
-                dashboard.button("p", " " .. " Projects", ":Telescope projects <CR>"),
+                dashboard.button("p", " " .. " Projects", ":Telescope projects<CR>"),
+                dashboard.button("c", " " .. " Chezmoi", ":Telescope chezmoi find_files<CR>"),
             },
             opts = {
                 hl = "AlphaButtons",

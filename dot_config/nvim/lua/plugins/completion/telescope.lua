@@ -30,6 +30,12 @@ return {
                 })
             end,
         },
+        {
+            "xvzc/chezmoi.nvim",
+            config = function()
+                require("chezmoi").setup({})
+            end,
+        },
         { "nvim-tree/nvim-web-devicons" },
     },
     config = function()
@@ -46,6 +52,7 @@ return {
         pcall(require("telescope").load_extension, "projects")
         pcall(require("telescope").load_extension, "smart_open")
         pcall(require("telescope").load_extension, "zoxide")
+        pcall(require("telescope").load_extension, "chezmoi")
 
         local builtin = require("telescope.builtin")
         vim.keymap.set("n", "<leader>fg", function()
@@ -74,5 +81,10 @@ return {
         vim.keymap.set("n", "<leader>fz", function()
             zoxide.list({})
         end, { desc = "File [Z]oxide" })
+
+        local chezmoi = require("telescope").extensions.chezmoi
+        vim.keymap.set("n", "<leader>fc", function()
+            chezmoi.find_files({})
+        end, { desc = "File [C]hezmoi" })
     end,
 }

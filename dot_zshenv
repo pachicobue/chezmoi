@@ -1,7 +1,8 @@
-echo "Loading .zshenv"
+echo "Loading .zshenv ..."
 
 path+=('$HOME/.local/bin')
 path+=('$HOME/.cargo/bin')
+fpath+=('$HOME/.zsh/functions')
 
 export EDITOR='nvr --remote-tab-wait-silent'
 export VISUAL='nvr --remote-tab-wait-silent'
@@ -14,9 +15,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # fcitx
 export XMODIFIERS=@im=fcitx
-
-# firefox
-export MOZ_ENABLE_WAYLAND=1
 
 # Zsh config place
 export ZDOTDIR=$HOME/.config/zsh 
