@@ -19,6 +19,7 @@ return {
             ["<CR>"] = "actions.select",
             ["-"] = "actions.parent",
             ["q"] = "actions.close",
+            ["<Esc>"] = "actions.close",
             ["<C-l>"] = "actions.refresh",
             ["<space>"] = "actions.open_cwd",
             ["g."] = "actions.toggle_hidden",
