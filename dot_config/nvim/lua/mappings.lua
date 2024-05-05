@@ -9,3 +9,5 @@ vim.keymap.set({ "n", "v" }, "k", "gk")
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "$")
 vim.keymap.set("n", ";", ":")
+
+vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "[W]rite" })

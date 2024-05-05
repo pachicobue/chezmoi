@@ -1,53 +1,8 @@
 return {
-    -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
-        {
-            "nvimdev/lspsaga.nvim",
-            dependencies = {
-                "nvim-treesitter/nvim-treesitter",
-                "nvim-tree/nvim-web-devicons",
-                {
-                    "lewis6991/gitsigns.nvim",
-                    config = true,
-                },
-            },
-            config = function()
-                require("lspsaga").setup({
-                    symbol_in_winbar = {
-                        enable = true,
-                        show_file = false,
-                        hide_keyword = true,
-                        folder_level = 1,
-                    },
-                    callhierarchy = {
-                        layout = "float",
-                    },
-                    code_actions = {
-                        show_server_name = true,
-                        extend_gitsigns = true,
-                    },
-                    finder = {
-                        keys = {
-                            shuttle = "<leader>w",
-                            toggle_or_open = "<CR>",
-                        },
-                    },
-                    lightbulb = {
-                        enabled = false,
-                    },
-                    rename = {
-                        keys = {
-                            quit = "<Esc>",
-                        },
-                    },
-                })
-            end,
-        },
-        {
-            "folke/neodev.nvim",
-            config = true,
-        },
+        "nvimdev/lspsaga.nvim",
+        "folke/neodev.nvim",
     },
     config = function()
         vim.api.nvim_create_autocmd("LspAttach", {
@@ -62,6 +17,19 @@ return {
                 map("<leader>lf", "<Cmd>Lspsaga finder<CR>", "LSP [F]inder")
                 map("<leader>lh", "<Cmd>Lspsaga hover_doc<CR>", "LSP [H]over")
                 map("<leader>ln", "<Cmd>Lspsaga rename<CR>", "LSP Re[N]ame")
+
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    pattern = { "*.rs", "*.py" },
+                    callback = function()
+                        vim.lsp.buf.format({
+                            buffer = event.buf,
+                            filter = function(f_client)
+                                return f_client.name ~= "null-ls"
+                            end,
+                            async = false,
+                        })
+                    end,
+                })
             end,
         })
 
@@ -73,7 +41,15 @@ return {
             },
         })
         lspconfig.pyright.setup({})
-        lspconfig.rust_analyzer.setup({})
+        lspconfig.rust_analyzer.setup({
+            settings = {
+                ["rust-analyzer"] = {
+                    check = {
+                        command = "clippy",
+                    },
+                },
+            },
+        })
         lspconfig.lua_ls.setup({
             settings = {
                 Lua = {

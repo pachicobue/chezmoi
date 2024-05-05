@@ -4,28 +4,9 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "saadparwaiz1/cmp_luasnip",
-        {
-            "L3MON4D3/LuaSnip",
-            tag = "v2.3.0",
-            run = "make install_jsregexp",
-        },
+        "L3MON4D3/LuaSnip",
         "onsails/lspkind.nvim",
-        {
-            "zbirenbaum/copilot.lua",
-            cmd = "Copilot",
-            config = function()
-                require("copilot").setup({
-                    panel = {
-                        enable = false,
-                    },
-                    suggestion = {
-                        enabled = true,
-                        auto_trigger = true,
-                        debounce = 50,
-                    },
-                })
-            end,
-        },
+        "zbirenbaum/copilot.lua",
     },
     config = function()
         local cmp = require("cmp")
@@ -62,7 +43,7 @@ return {
             }),
             sources = {
                 { name = "nvim_lsp", group_index = 2, keyword_length = 4 },
-                { name = "luasnip",  group_index = 1, keyword_length = 4 },
+                { name = "luasnip", group_index = 1, keyword_length = 4 },
             },
             formatting = {
                 expandable_indicator = true,

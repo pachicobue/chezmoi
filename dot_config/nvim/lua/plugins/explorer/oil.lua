@@ -17,12 +17,14 @@ return {
     opts = {
         keymaps = {
             ["<CR>"] = "actions.select",
-            ["-"] = "actions.parent",
             ["q"] = "actions.close",
-            ["<Esc>"] = "actions.close",
             ["<C-l>"] = "actions.refresh",
-            ["<space>"] = "actions.open_cwd",
+            ["-"] = "actions.parent",
+            ["_"] = "actions.open_cwd",
+            ["`"] = "actions.cd",
+            ["~"] = "actions.tcd",
             ["g."] = "actions.toggle_hidden",
+            ["g?"] = "actions.show_help",
         },
         view_options = {
             show_hidden = true,

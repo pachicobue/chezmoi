@@ -8,7 +8,7 @@ return {
             direction = "float",
             hidden = true,
         })
-        local tig = Terminal:new({
+        local lazygit = Terminal:new({
             cmd = "lazygit",
             dir = "git_dir",
             direction = "float",
@@ -18,15 +18,11 @@ return {
             end,
         })
 
-        function ToggleCommonTerm()
+        vim.keymap.set("n", "<leader>tt", function()
             common:toggle()
-        end
-
-        function ToggleTigTerm()
-            tig:toggle()
-        end
-
-        vim.keymap.set("n", "<leader>tt", "<Cmd>lua ToggleCommonTerm()<CR>", { desc = "Toggle [T]erminal" })
-        vim.keymap.set("n", "<leader>tg", "<Cmd>lua ToggleTigTerm()<CR>", { desc = "Toggle [G]it" })
+        end, { desc = "Toggle [T]erminal" })
+        vim.keymap.set("n", "<leader>tg", function()
+            lazygit:toggle()
+        end, { desc = "Toggle [G]it" })
     end,
 }

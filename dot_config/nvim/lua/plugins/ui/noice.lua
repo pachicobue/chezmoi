@@ -3,17 +3,18 @@ return {
     event = "VeryLazy",
     dependencies = {
         "MunifTanjim/nui.nvim",
-        {
-            "rcarriga/nvim-notify",
-            config = function()
-                require("notify").setup({
-                    timeout = 300,
-                    level = 2,
-                })
-            end,
-        },
+        "rcarriga/nvim-notify",
     },
     config = function()
-        require("noice").setup({})
+        require("noice").setup({
+            messages = {
+                enabled = true,
+                view = "mini",
+            },
+            notify = {
+                enabled = true,
+                view = "mini",
+            },
+        })
     end,
 }

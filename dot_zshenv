@@ -20,8 +20,9 @@ export STARSHIP_CONFIG=~/.config/starship/config.toml
 export SHELDON_CONFIG_DIR=$ZDOTDIR
 
 # Online Judge
-export ALGOLIB_PATH=${HOME}/programming/oj-environment/algolib
-export ACL_PATH=${HOME}/programming/oj-environment/ac-library
+export CP_ENV_PATH=${HOME}/ghq/github.com/pachicobue/cp-environment
+export ALGOLIB_PATH=${CP_ENV_PATH}/algolib
+export ACL_PATH=${CP_ENV_PATH}/ac-library
 export CXX_COMPILER=clang++
 cxx_common_options=(-std=gnu++20 -Wall -Wextra -I${ALGOLIB_PATH}/src -I${ACL_PATH})
 cxx_debug_options=(-O0 -g3 -fsanitize=undefined,address -DHOGAPACHI)
