@@ -1,8 +1,8 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "nvimdev/lspsaga.nvim",
         "folke/neodev.nvim",
+        "nvimdev/lspsaga.nvim",
     },
     config = function()
         vim.api.nvim_create_autocmd("LspAttach", {
