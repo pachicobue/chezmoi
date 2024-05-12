@@ -6,18 +6,27 @@ return {
     },
     keys = {
         {
-            "<leader>e",
+            "<leader>te",
             function()
                 local cd = vim.fn.expand("%:p:h")
                 require("oil").open_float(cd)
             end,
-            desc = "[E]xplorer",
+            desc = "Toggle [E]xplorer",
+        },
+        {
+            mode = { "n", "i" },
+            "<C-f>",
+            function()
+                local cd = vim.fn.expand("%:p:h")
+                require("oil").open_float(cd)
+            end,
         },
     },
     opts = {
         keymaps = {
             ["<CR>"] = "actions.select",
             ["q"] = "actions.close",
+            ["<C-f>"] = "actions.close",
             ["<C-l>"] = "actions.refresh",
             ["-"] = "actions.parent",
             ["_"] = "actions.open_cwd",

@@ -10,7 +10,6 @@ return {
         })
         local lazygit = Terminal:new({
             cmd = "lazygit",
-            dir = "git_dir",
             direction = "float",
             hidden = true,
             on_open = function(term)
@@ -18,14 +17,17 @@ return {
             end,
         })
 
-        vim.keymap.set({ "n", "i", "t" }, "<C-t>", function()
-            common:toggle()
-        end)
-        vim.keymap.set({ "n" }, "<leader>tt", function()
+        vim.keymap.set("n", "<leader>tt", function()
             common:toggle()
         end, { desc = "Toggle [T]erminal" })
         vim.keymap.set("n", "<leader>tg", function()
             lazygit:toggle()
         end, { desc = "Toggle [G]it" })
+        vim.keymap.set({ "n", "i", "t" }, "<C-t>", function()
+            common:toggle()
+        end)
+        vim.keymap.set({ "n", "i", "t" }, "<C-g>", function()
+            lazygit:toggle()
+        end)
     end,
 }
