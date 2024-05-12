@@ -15,9 +15,8 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export XMODIFIERS=@im=fcitx
 
 # Zsh config place
-export ZDOTDIR=$HOME/.config/zsh
 export STARSHIP_CONFIG=~/.config/starship/config.toml
-export SHELDON_CONFIG_DIR=$ZDOTDIR
+export SHELDON_CONFIG_DIR=~/.config/zsh/
 
 # Online Judge
 export CP_ENV_PATH=${HOME}/ghq/github.com/pachicobue/cp-environment

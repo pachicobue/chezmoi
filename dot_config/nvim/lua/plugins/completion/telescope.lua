@@ -33,12 +33,6 @@ return {
             end,
             desc = "Find [B]uffer",
         },
-        {
-            "<leader><space>",
-            function()
-                require("telescope.builtin").buffers({})
-            end,
-        },
     },
     config = function()
         require("telescope").setup({})

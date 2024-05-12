@@ -21,5 +21,6 @@ require("lazy").setup({
         { import = "plugins.lang" },
         { import = "plugins.terminal" },
         { import = "plugins.completion" },
+        { import = "plugins.task" },
     },
 })

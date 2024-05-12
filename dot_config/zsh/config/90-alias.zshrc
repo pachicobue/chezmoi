@@ -11,7 +11,7 @@ alias lta='eza -T -L 3 -a -I "node_modules|.git|.cache" --icons'
 alias gcd='cd "$(ghq list --full-path | fzf)"'
 
 # Restart
-alias resource="source ${ZDOTDIR}/.zshrc"
+alias resource="source ~/.zshrc"
 alias reload='exec -l ${SHELL}'
 
 # Editor

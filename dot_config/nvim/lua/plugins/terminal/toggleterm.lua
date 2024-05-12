@@ -2,7 +2,7 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = function()
-        require("toggleterm").setup()
+        require("toggleterm").setup({})
         local Terminal = require("toggleterm.terminal").Terminal
         local common = Terminal:new({
             direction = "float",
