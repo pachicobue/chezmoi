@@ -18,7 +18,10 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>tt", function()
+        vim.keymap.set({ "n", "i", "t" }, "<C-t>", function()
+            common:toggle()
+        end)
+        vim.keymap.set({ "n" }, "<leader>tt", function()
             common:toggle()
         end, { desc = "Toggle [T]erminal" })
         vim.keymap.set("n", "<leader>tg", function()

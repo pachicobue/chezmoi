@@ -16,7 +16,7 @@ return {
                 map("<leader>le", "<Cmd>Lspsaga diagnostic_jump_next<CR>", "LSP [E]rror")
                 map("<leader>lf", "<Cmd>Lspsaga finder<CR>", "LSP [F]inder")
                 map("<leader>lh", "<Cmd>Lspsaga hover_doc<CR>", "LSP [H]over")
-                map("<leader>ln", "<Cmd>Lspsaga rename<CR>", "LSP Re[N]ame")
+                map("<leader>lr", "<Cmd>Lspsaga rename<CR>", "LSP [R]ename")
 
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     pattern = { "*.rs", "*.py" },

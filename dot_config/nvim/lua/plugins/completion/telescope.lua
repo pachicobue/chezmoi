@@ -13,11 +13,31 @@ return {
     },
     keys = {
         {
-            "<leader>g",
+            "<leader>fg",
             function()
                 require("telescope.builtin").live_grep({})
             end,
-            desc = "[G]rep",
+            desc = "Find [G]rep",
+        },
+        {
+            "<leader>ff",
+            function()
+                require("telescope.builtin").find_files({})
+            end,
+            desc = "Find [F]ile",
+        },
+        {
+            "<leader>fb",
+            function()
+                require("telescope.builtin").buffers({})
+            end,
+            desc = "Find [B]uffer",
+        },
+        {
+            "<leader><space>",
+            function()
+                require("telescope.builtin").buffers({})
+            end,
         },
     },
     config = function()

@@ -6,12 +6,12 @@ return {
     },
     keys = {
         {
-            "<leader>te",
+            "<leader>e",
             function()
                 local cd = vim.fn.expand("%:p:h")
                 require("oil").open_float(cd)
             end,
-            desc = "Toggle [E]xplorer",
+            desc = "[E]xplorer",
         },
     },
     opts = {
