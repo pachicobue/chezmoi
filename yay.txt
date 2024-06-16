@@ -1,9 +1,12 @@
 brother-dcpj582n
+cfonts
 ghq
+hotspot
 hyprshot
 mise
 neovim-remote
 nkf-debug
 nvm
+usage
 wlogout
 yay

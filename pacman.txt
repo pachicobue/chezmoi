@@ -28,6 +28,7 @@ fzf
 git
 git-delta
 github-cli
+gnu-netcat
 greetd
 greetd-tuigreet
 grub
@@ -48,6 +49,7 @@ libvterm
 linux
 linux-firmware
 linux-headers
+lldb
 lua-language-server
 luarocks
 make
@@ -70,6 +72,7 @@ openssh
 pandoc-cli
 patch
 pavucontrol
+perf
 pipewire-pulse
 pkgconf
 poppler-glib
@@ -82,11 +85,12 @@ qt6ct
 rclone
 ripgrep
 ruby
-rust-analyzer
+rustup
 seahorse
 sheldon
 starship
 steam
+strace
 stylua
 sudo
 tealdeer
