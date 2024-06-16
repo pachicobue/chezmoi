@@ -8,7 +8,6 @@ end
 
 -- Display
 vim.opt.ambiwidth = "single"
-vim.opt.cursorline = true
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.scrolloff = 5
@@ -18,6 +17,8 @@ vim.opt.fillchars = ""
 
 -- System
 vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 vim.opt.jumpoptions = "stack"
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
@@ -48,3 +49,4 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
+vim.opt.cindent = true

@@ -17,12 +17,6 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>tt", function()
-            common:toggle()
-        end, { desc = "Toggle [T]erminal" })
-        vim.keymap.set("n", "<leader>tg", function()
-            lazygit:toggle()
-        end, { desc = "Toggle [G]it" })
         vim.keymap.set({ "n", "i", "t" }, "<C-t>", function()
             common:toggle()
         end)

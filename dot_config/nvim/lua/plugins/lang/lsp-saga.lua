@@ -25,7 +25,7 @@ return {
                 },
             },
             lightbulb = {
-                enabled = false,
+                enable = false,
             },
             rename = {
                 keys = {

@@ -3,6 +3,8 @@ echo "Loading .zshenv ..."
 path+=('$HOME/.local/bin')
 path+=('$HOME/.cargo/bin')
 fpath+=('$HOME/.zsh/functions')
+typeset -U path PATH
+typeset -U fpath FPATH
 
 export EDITOR='nvr --remote-tab-wait-silent'
 export VISUAL='nvr --remote-tab-wait-silent'
@@ -18,34 +20,3 @@ export XMODIFIERS=@im=fcitx
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 export SHELDON_CONFIG_DIR=~/.config/zsh/
 
-# Online Judge
-export CP_ENV_PATH=${HOME}/ghq/github.com/pachicobue/cp-environment
-export ALGOLIB_PATH=${CP_ENV_PATH}/algolib
-export ACL_PATH=${CP_ENV_PATH}/ac-library
-export CXX_COMPILER=clang++
-cxx_common_options=(-std=gnu++20 -Wall -Wextra -I${ALGOLIB_PATH}/src -I${ACL_PATH})
-cxx_debug_options=(-O0 -g3 -fsanitize=undefined,address -DHOGAPACHI)
-cxx_release_options=(-O2 -DHOGEPACHI)
-export CXX_COMMON_OPTIONS="${cxx_common_options}"
-export CXX_DEBUG_OPTIONS="${cxx_debug_options}"
-export CXX_RELEASE_OPTIONS="${cxx_release_options}"
-function dg++() {
-    source_name=${1}
-    binary_name=${1%.cpp}.exe
-    ${CXX_COMPILER} ${cxx_common_options} ${cxx_debug_options} ${source_name} -o ${binary_name}
-}
-function fg++() {
-    source_name=${1}
-    binary_name=${1%.cpp}.exe
-    ${CXX_COMPILER} ${cxx_common_options} ${cxx_release_options} ${source_name} -o ${binary_name}
-}
-function dgch() {
-    source_name=${1}
-    binary_name=${1}.dg++.gch
-    ${CXX_COMPILER} ${cxx_common_options} ${cxx_debug_options} ${source_name} -o ${binary_name}
-}
-function fgch() {
-    source_name=${1}
-    binary_name=${1}.fg++.gch
-    ${CXX_COMPILER} ${cxx_common_options} ${cxx_release_options} ${source_name} -o ${binary_name}
-}

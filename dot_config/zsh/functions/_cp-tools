@@ -1,0 +1,184 @@
+#compdef cp-tools
+
+autoload -U is-at-least
+
+_cp-tools() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_cp-tools_commands" \
+"*::: :->cp-tools" \
+&& ret=0
+    case $state in
+    (cp-tools)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:cp-tools-command-$line[1]:"
+        case $line[1] in
+            (expand)
+_arguments "${_arguments_options[@]}" \
+'-o+[出力先ファイル]:OUTPUT: ' \
+'--output=[出力先ファイル]:OUTPUT: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':file -- 入力ファイル(.cppのみ対応):' \
+&& ret=0
+;;
+(download)
+_arguments "${_arguments_options[@]}" \
+'-d+[出力先ディレクトリ]:DIR: ' \
+'--dir=[出力先ディレクトリ]:DIR: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':url -- URL:' \
+&& ret=0
+;;
+(login)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':url -- URL:' \
+&& ret=0
+;;
+(completion)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':shell -- Shell:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_cp-tools__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:cp-tools-help-command-$line[1]:"
+        case $line[1] in
+            (expand)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(download)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(login)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(completion)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_cp-tools_commands] )) ||
+_cp-tools_commands() {
+    local commands; commands=(
+'expand:ソースコード中の#includeを展開する' \
+'download:サンプルケースをダウンロードする' \
+'login:オンラインジャッジにログインする' \
+'completion:シェル補完関数を生成する' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'cp-tools commands' commands "$@"
+}
+(( $+functions[_cp-tools__completion_commands] )) ||
+_cp-tools__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools completion commands' commands "$@"
+}
+(( $+functions[_cp-tools__help__completion_commands] )) ||
+_cp-tools__help__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools help completion commands' commands "$@"
+}
+(( $+functions[_cp-tools__download_commands] )) ||
+_cp-tools__download_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools download commands' commands "$@"
+}
+(( $+functions[_cp-tools__help__download_commands] )) ||
+_cp-tools__help__download_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools help download commands' commands "$@"
+}
+(( $+functions[_cp-tools__expand_commands] )) ||
+_cp-tools__expand_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools expand commands' commands "$@"
+}
+(( $+functions[_cp-tools__help__expand_commands] )) ||
+_cp-tools__help__expand_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools help expand commands' commands "$@"
+}
+(( $+functions[_cp-tools__help_commands] )) ||
+_cp-tools__help_commands() {
+    local commands; commands=(
+'expand:ソースコード中の#includeを展開する' \
+'download:サンプルケースをダウンロードする' \
+'login:オンラインジャッジにログインする' \
+'completion:シェル補完関数を生成する' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'cp-tools help commands' commands "$@"
+}
+(( $+functions[_cp-tools__help__help_commands] )) ||
+_cp-tools__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools help help commands' commands "$@"
+}
+(( $+functions[_cp-tools__help__login_commands] )) ||
+_cp-tools__help__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools help login commands' commands "$@"
+}
+(( $+functions[_cp-tools__login_commands] )) ||
+_cp-tools__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'cp-tools login commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_cp-tools" ]; then
+    _cp-tools "$@"
+else
+    compdef _cp-tools cp-tools
+fi
