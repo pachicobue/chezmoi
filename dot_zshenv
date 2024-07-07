@@ -1,8 +1,8 @@
 echo "Loading .zshenv ..."
 
-path+=('$HOME/.local/bin')
-path+=('$HOME/.cargo/bin')
-fpath+=('$HOME/.zsh/functions')
+path+=("$HOME/.local/bin")
+path+=("$HOME/.cargo/bin")
+fpath+=("$HOME/.zsh/functions")
 typeset -U path PATH
 typeset -U fpath FPATH
 

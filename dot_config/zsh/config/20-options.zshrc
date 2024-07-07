@@ -16,4 +16,4 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushd_silent
 setopt pushd_to_home
-function chpwd() { ls -ltr --color=auto }
+function chpwd() { ls  }

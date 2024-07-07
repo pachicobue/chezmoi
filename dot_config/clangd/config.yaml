@@ -1,0 +1,9 @@
+CompileFlags:
+  Add: [-std=c++20, -Wall, -Wextra, -DHOGEPACHI, -I/home/sho/ghq/github.com/pachicobue/algolib/src, -I/home/sho/ghq/github.com/atcoder/ac-library]
+  Compiler: clang++
+
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+
+
