@@ -21,6 +21,9 @@ inline = 'eval "$(mise activate zsh)"'
 [plugins.mcfly]
 inline = 'eval "$(mcfly init zsh)"'
 
+[plugins.zelilj]
+inline = 'eval "$(zellij setup --generate-auto-start zsh)"'
+
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
 
@@ -29,5 +32,4 @@ github = 'zsh-users/zsh-syntax-highlighting'
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
-
 

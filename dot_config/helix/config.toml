@@ -1,0 +1,35 @@
+theme = "papercolor-dark"
+
+[editor]
+line-number = "absolute"
+bufferline = "always"
+color-modes = true
+true-color = true
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+[editor.whitespace.render]
+space = "none"
+nbsp = "all"
+nnbsp = "all"
+tab = "all"
+newline = "none"
+tabpad = "none"
+[editor.file-picker]
+max-depth = 6
+hidden = false
+[editor.indent-guides]
+render = true
+[editor.soft-wrap]
+enable = true
+
+
+
+[keys.insert.j]
+j = "normal_mode"
+k = "normal_mode"
+
+[keys.normal.space]
+w = ":w"
+"space" = "command_mode"
