@@ -2,12 +2,12 @@ echo "Loading .zshenv ..."
 
 path+=("$HOME/.local/bin")
 path+=("$HOME/.cargo/bin")
-fpath+=("$HOME/.zsh/functions")
+fpath+=("$HOME/.config/zsh/functions/")
 typeset -U path PATH
 typeset -U fpath FPATH
 
-export EDITOR='nvr --remote-tab-wait-silent'
-export VISUAL='nvr --remote-tab-wait-silent'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export LANG=ja_JP.UTF-8
 
 # ssh-agent
