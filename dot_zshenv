@@ -6,8 +6,8 @@ fpath+=("$HOME/.config/zsh/functions/")
 typeset -U path PATH
 typeset -U fpath FPATH
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='helix'
+export VISUAL="${EDITOR}"
 export LANG=ja_JP.UTF-8
 
 # ssh-agent

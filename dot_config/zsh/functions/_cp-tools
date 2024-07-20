@@ -30,36 +30,36 @@ _cp-tools() {
         case $line[1] in
             (expand)
 _arguments "${_arguments_options[@]}" : \
-'-o+[出力先ファイル]:OUTPUT: ' \
-'--output=[出力先ファイル]:OUTPUT: ' \
+'-o+[出力先ファイル]:OUTPUT:_files' \
+'--output=[出力先ファイル]:OUTPUT:_files' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-':file -- 入力ファイル(.cppのみ対応):' \
+':file -- 入力ファイル(.cppのみ対応):_files' \
 && ret=0
 ;;
 (build)
 _arguments "${_arguments_options[@]}" : \
-'-o+[出力先ファイル]:OUTPUT: ' \
-'--output=[出力先ファイル]:OUTPUT: ' \
+'-o+[出力先ファイル]:OUTPUT:_files' \
+'--output=[出力先ファイル]:OUTPUT:_files' \
 '--release[コンパイル最適化フラグ]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-':file -- 入力ファイル(.cppのみ対応):' \
+':file -- 入力ファイル(.cppのみ対応):_files' \
 && ret=0
 ;;
 (download)
 _arguments "${_arguments_options[@]}" : \
-'-d+[出力先ディレクトリ]:DIR: ' \
-'--dir=[出力先ディレクトリ]:DIR: ' \
+'-d+[出力先ディレクトリ]:DIR:_files' \
+'--dir=[出力先ディレクトリ]:DIR:_files' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-':url -- URL:' \
+':url -- URL:_urls' \
 && ret=0
 ;;
 (login)
@@ -68,7 +68,7 @@ _arguments "${_arguments_options[@]}" : \
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-':url -- URL:' \
+':url -- URL:_urls' \
 && ret=0
 ;;
 (completion)

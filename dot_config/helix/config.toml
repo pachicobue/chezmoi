@@ -1,10 +1,11 @@
-theme = "papercolor-dark"
+theme = "monokai_aqua"
 
 [editor]
-line-number = "absolute"
+middle-click-paste = false
 bufferline = "always"
 color-modes = true
 true-color = true
+undercurl = true
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
@@ -16,20 +17,27 @@ nnbsp = "all"
 tab = "all"
 newline = "none"
 tabpad = "none"
-[editor.file-picker]
-max-depth = 6
-hidden = false
 [editor.indent-guides]
 render = true
-[editor.soft-wrap]
-enable = true
-
-
 
 [keys.insert.j]
 j = "normal_mode"
 k = "normal_mode"
 
+[keys.normal]
+H = ":buffer-previous"
+L = ":buffer-next"
+C-f = ":sh zellij run -f -x 5% -y 5% --width 90% --height 90% -- bash ~/.config/helix/yazi-picker.sh"
+
 [keys.normal.space]
-w = ":w"
+w = ":write"
+f = "file_picker"
+F = "file_picker_in_current_directory"
+"." = "file_picker_in_current_buffer_directory"
+x = ":buffer-close"
+X = ":buffer-close!"
+o = ":buffer-close-others"
+O = ":buffer-close-others!"
+q = ":quit"
+Q = ":quit!"
 "space" = "command_mode"
