@@ -1,4 +1,4 @@
-theme = "monokai_aqua"
+theme = "iroaseta"
 
 [editor]
 middle-click-paste = false
@@ -27,10 +27,10 @@ k = "normal_mode"
 [keys.normal]
 H = ":buffer-previous"
 L = ":buffer-next"
-C-f = ":sh zellij run -f -x 5% -y 5% --width 90% --height 90% -- bash ~/.config/helix/yazi-picker.sh"
 
 [keys.normal.space]
 w = ":write"
+W = ":write-all"
 f = "file_picker"
 F = "file_picker_in_current_directory"
 "." = "file_picker_in_current_buffer_directory"

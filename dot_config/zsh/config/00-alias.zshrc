@@ -10,10 +10,13 @@ alias lt='eza -T -L 3 -I "node_modules|.git|.cache" --icons'
 alias lta='eza -T -L 3 -a -I "node_modules|.git|.cache" --icons'
 
 # ghq
-alias gcd='cd "$(ghq list --full-path | fzf)"'
+_cd_project() {
+	local prj_path=$(ghq list --full-path | fzf)
+	cd $prj_path
+}
+alias gcd=_cd_project 
 
 # CP
-alias cpt='cp-tools'
 alias dg++='cpt build'
 alias fg++='cpt build --release'
 
