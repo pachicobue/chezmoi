@@ -1,12 +1,6 @@
-brother-dcpj582n
-cfonts
-ghq
+fakeroot-tcp
 hotspot
-hyprshot
 mise
-neovim-remote
-nkf-debug
-nvm
-usage
-wlogout
-yay
+paru
+paru-debug
+yay-debug
