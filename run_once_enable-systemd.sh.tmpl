@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+# ssh-agent service
+systemctl enable --user ssh-agent.service
+systemctl start --user ssh-agent.service
+
+# for WSL
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+systemctl enable --user systemd-tmpfiles-clean.timer systemd-tmpfiles-setup.service
+systemctl start --user systemd-tmpfiles-clean.timer systemd-tmpfiles-setup.service
+
+{{   end }}
+{{ end }}
