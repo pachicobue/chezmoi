@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+# Install paru 
+if ! type ${r} >/dev/null 2>&1; then
+  sudo pacman -S --needed base-devel rustup
+  rustup default stable
+
+  set +e
+  eval `ssh-agent -s`
+  ssh-add
+  git clone https://aur.archlinux.org/paru.git
+  cd paru
+  makepkg -si
+  cd ..
+  rm -rf paru
+
+  set -e
+  paru
+fi
+
+# Install packages (Arch@WSL)
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+cat {{ joinPath .chezmoi.sourceDir "pacman_wsl.txt"}} | paru -S -
+
+{{   end }}
+{{ end }}
+
+# Install rustup components
+rustup component add clippy rust-analysis rust-src rust-docs rustfmt rust-analyzer
+
+# Install cargo package
+cargo install cargo-expand
+cargo install cargo-audit
+cargo install cargo-tomlfmt
+cargo install cargo-nextest
+cargo install tokio-console

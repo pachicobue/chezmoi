@@ -1,6 +1,0 @@
-fakeroot-tcp
-hotspot
-mise
-paru
-paru-debug
-yay-debug

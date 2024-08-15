@@ -1,2 +1,4 @@
-pacman.txt
-yay.txt
+README.md
+pacman_wsl.txt
+run_once_install-packages.sh.tmpl
+run_once_locale.sh
