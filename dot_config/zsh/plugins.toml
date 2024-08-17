@@ -12,9 +12,6 @@ inline = 'autoload -Uz colors && colors'
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
 
-[plugins.zoxide]
-inline = 'eval "$(zoxide init zsh)"'
-
 [plugins.mise]
 inline = 'eval "$(mise activate zsh)"'
 

@@ -11,7 +11,7 @@ alias lta='eza -T -L 3 -a -I "node_modules|.git|.cache" --icons'
 
 # ghq
 _cd_project() {
-	local prj_path=$(ghq list --full-path | fzf)
+	local prj_path=$(ghq list --full-path | sk)
 	cd $prj_path
 }
 alias gcd=_cd_project 

@@ -5,6 +5,7 @@ set -e
 if ! type ${r} >/dev/null 2>&1; then
   sudo pacman -S --needed base-devel rustup
   rustup default stable
+  rustup install nightly
 
   set +e
   eval `ssh-agent -s`
@@ -30,10 +31,8 @@ cat {{ joinPath .chezmoi.sourceDir "pacman_wsl.txt"}} | paru -S -
 
 # Install rustup components
 rustup component add clippy rust-analysis rust-src rust-docs rustfmt rust-analyzer
+rustup component add rustfmt  --toolchain nightly
 
 # Install cargo package
-cargo install cargo-expand
-cargo install cargo-audit
 cargo install cargo-tomlfmt
-cargo install cargo-nextest
 cargo install tokio-console
